@@ -30,7 +30,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $data = $this->validate($request, [
             'product_name' => 'required|string|max:50',
             'product_stock' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
@@ -53,7 +53,7 @@ class ProductController extends Controller
 
     public function update($id, Request $request)
     {
-        $this->validate($request, [
+        $data = $this->validate($request, [
             'product_name' => 'required|string|max:50',
             'product_stock' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',

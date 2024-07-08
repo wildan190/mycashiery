@@ -52,6 +52,30 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
+            {{ __('Management') }}
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item {{ Nav::isRoute('products.index') }}">
+            <a class="nav-link" href="{{ route('products.index') }}">
+                <i class="fas fa-fw fa-boxes"></i>
+                <span>{{ __('Products') }}</span>
+            </a>
+        </li>
+
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item {{ Nav::isRoute('categories.index') }}">
+            <a class="nav-link" href="{{ route('categories.index') }}">
+                <i class="fas fa-fw fa-list"></i>
+                <span>{{ __('Categories') }}</span>
+            </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
             {{ __('Settings') }}
         </div>
 
