@@ -42,7 +42,7 @@
                     <table class="table table-bordered" id="productsTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>{{ __('ID') }}</th>
+                                <th>{{ __('No') }}</th>
                                 <th>{{ __('Product Name') }}</th>
                                 <th>{{ __('Category') }}</th>
                                 <th>{{ __('Price') }}</th>
@@ -54,14 +54,14 @@
                         <tbody>
                             @foreach ($products as $product)
                             <tr>
-                                <td>{{ $product->id }}</td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $product->product_name }}</td>
                                 <td>{{ $product->category->name }}</td>
                                 <td>{{ $product->price }}</td>
                                 <td>{{ $product->product_stock }}</td>
                                 <td>
                                     @if($product->picture)
-                                        <img src="{{ asset('storage/pictures/products/' . $product->picture) }}" alt="{{ $product->product_name }}" width="100px" height="100px">
+                                    <img src="{{ asset('storage/' . $product->picture) }}" alt="{{ $product->product_name }}" class="h-8 w-auto object-cover mb-2">
                                     @endif
                                 </td>
                                 <td>

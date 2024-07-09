@@ -33,6 +33,14 @@ Route::group(['prefix' => 'products', 'middleware' => 'auth'], function() {
     Route::delete('/{id}', 'ProductController@destroy')->name('products.destroy');
 });
 
+Route::group(['prefix' => 'transactions', 'middleware' => 'auth'], function() {
+    Route::get('/', 'TransactionController@index')->name('transactions.index');
+    Route::get('/create', 'TransactionController@create')->name('transactions.create');
+    Route::post('/', 'TransactionController@store')->name('transactions.store');
+    Route::get('/{id}', 'TransactionController@show')->name('transactions.show');
+    Route::get('/{id}/print', 'TransactionController@print')->name('transactions.print');
+});
+
 Route::get('/about', function () {
     return view('about');
 })->name('about');
