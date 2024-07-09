@@ -60,6 +60,9 @@
                                     <a href="{{ route('transactions.show', $transaction->id) }}" class="btn btn-primary btn-circle btn-sm">
                                         <i class="fas fa-eye"></i>
                                     </a>
+                                    <a href="{{ route('transactions.print', $transaction->id) }}" class="btn btn-success btn-circle btn-sm">
+                                        <i class="fas fa-print"></i>
+                                    </a>
                                 </td>
                             </tr>
                             @endforeach

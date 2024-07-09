@@ -21,12 +21,12 @@
 @endif
 
 <div class="row">
-    <div class="col-lg-6 mb-4">
-        <a href="{{ route('products.create') }}" class="btn btn-primary btn-icon-split">
+    <div class="col-lg-12 mb-4">
+        <a href="{{ route('products.index') }}" class="btn btn-primary btn-icon-split">
             <span class="icon text-white-50">
-                <i class="fas fa-plus"></i>
+                <i class="fas fa-arrow-left"></i>
             </span>
-            <span class="text">{{ __('Create Product') }}</span>
+            <span class="text">{{ __('Back') }}</span>
         </a>
     </div>
 </div>
