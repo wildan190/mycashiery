@@ -2,8 +2,7 @@
 
 @section('main-content')
 
-<!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">{{ __('Monthly Report') }}</h1>
+{{ Breadcrumbs::render('reports.monthly') }}
 
 <div class="card mb-4">
     <div class="card-header text-center">

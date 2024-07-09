@@ -2,7 +2,7 @@
 
 @section('main-content')
 
-<!-- Page Heading -->
+{{ Breadcrumbs::render('products.create') }}
 <h1 class="h3 mb-4 text-gray-800">{{ __('Products') }}</h1>
 
 @if (session('success'))

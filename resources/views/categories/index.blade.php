@@ -2,6 +2,7 @@
 
 @section('main-content')
 
+{{ Breadcrumbs::render('categories.index') }}
 <!-- Page Heading -->
 <h1 class="h3 mb-4 text-gray-800">{{ __('Categories') }}</h1>
 

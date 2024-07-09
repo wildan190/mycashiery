@@ -2,6 +2,8 @@
 
 @section('main-content')
 
+{{ Breadcrumbs::render('transactions.create') }}
+
 <!-- Page Heading -->
 <h1 class="h3 mb-4 text-gray-800">{{ __('Create Transaction') }}</h1>
 
