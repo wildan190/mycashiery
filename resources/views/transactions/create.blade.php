@@ -29,16 +29,22 @@
                             <div class="bg-white p-4">
                                 <h3 class="text-lg font-medium text-gray-900 mb-4">Products</h3>
                                 <input type="text" id="search-product" class="mb-4 p-2 border rounded-md w-full" placeholder="Search Product...">
-                                <div id="product-grid" class="grid grid-cols-2 gap-4 mb-4">
-                                    @foreach ($products->take(12) as $product)
-                                    <div class="relative h-24 w-24 bg-gray-100 rounded-md border border-gray-200 shadow-sm px-2 py-1 flex flex-col justify-between">
-                                        <div class="flex-1">
-                                            <img src="{{ asset('storage/' . $product->picture) }}" alt="{{ $product->product_name }}" class="h-16 w-auto object-cover mb-2">
-                                            <h3 class="text-gray-700 text-base">{{ $product->product_name }}</h3>
-                                            <p class="mt-1 text-sm text-gray-500">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
+                                <div id="product-grid" class="grid grid-cols-4 gap-4 mb-4">
+                                    @foreach ($products->chunk(4) as $chunk)
+                                        <div class="row">
+                                            @foreach ($chunk as $product)
+                                                <div class="col-md-3">
+                                                    <div class="card mb-4 shadow-sm rounded-md border-0 bg-white" style="width: 10rem;">
+                                                        <img src="{{ asset('storage/' . $product->picture) }}" alt="{{ $product->product_name }}" class="card-img-top" style="height: 10rem;">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title text-truncate">{{ $product->product_name }}</h5>
+                                                            <p class="card-text text-truncate">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
+                                                            <button class="btn btn-primary btn-sm add-product-btn" data-product-id="{{ $product->id }}" data-product-name="{{ $product->product_name }}" data-product-price="{{ $product->price }}">Add</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
                                         </div>
-                                        <button class="absolute top-4 right-4 add-product-btn" data-product-id="{{ $product->id }}" data-product-name="{{ $product->product_name }}" data-product-price="{{ $product->price }}">Add</button>
-                                    </div>
                                     @endforeach
                                 </div>
                                 {{ $products->links('pagination::bootstrap-4') }}
@@ -50,10 +56,11 @@
                             <h3 class="text-lg font-medium text-gray-900 mb-4">Selected Products</h3>
                             <form action="{{ route('transactions.store') }}" method="POST" class="space-y-4">
                                 @csrf
-                                <div class="mb-3">
+                                <div class="mb-3" style="display: none;">
                                     <label for="transaction_date" class="form-label">Transaction Date:</label>
                                     <input readonly type="date" name="transaction_date" id="transaction_date" class="form-control" value="<?php echo date('Y-m-d') ?>">
                                 </div>
+                                <p class="form-control-static"><strong><?php echo date('Y-m-d') ?></strong></p>
                                 <div class="mb-3">
                                     <label for="customer" class="form-label">Customer:</label>
                                     <input type="text" name="customer" id="customer" class="form-control">

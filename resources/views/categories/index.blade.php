@@ -42,7 +42,7 @@
                     <table class="table table-bordered" id="categoriesTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>{{ __('ID') }}</th>
+                                <th>{{ __('No.') }}</th>
                                 <th>{{ __('Name') }}</th>
                                 <th>{{ __('Description') }}</th>
                                 <th>{{ __('Created At') }}</th>
@@ -53,7 +53,7 @@
                         <tbody>
                             @foreach ($categories as $category)
                             <tr>
-                                <td>{{ $category->id }}</td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $category->name }}</td>
                                 <td>{{ $category->description }}</td>
                                 <td>{{ $category->created_at }}</td>

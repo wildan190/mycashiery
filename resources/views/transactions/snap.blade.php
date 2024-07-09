@@ -27,6 +27,7 @@
                 onSuccess: function(result){
                     /* You may add your own implementation here */
                     alert("payment success!"); 
+                    window.location.href = "{{ route('transactions.create') }}";
                 },
                 onPending: function(result){
                     /* You may add your own implementation here */
