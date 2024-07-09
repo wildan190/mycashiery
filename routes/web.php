@@ -41,6 +41,11 @@ Route::group(['prefix' => 'transactions', 'middleware' => 'auth'], function() {
     Route::get('/{id}/print', 'TransactionController@print')->name('transactions.print');
 });
 
+Route::group(['prefix' => 'reports', 'middleware' => 'auth'], function() {
+    Route::get('/monthly', 'ReportController@monthlyReport')->name('reports.monthly');
+    Route::get('/products', 'ReportController@productReport')->name('reports.product');
+});
+
 Route::get('/about', function () {
     return view('about');
 })->name('about');

@@ -92,6 +92,30 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
+            {{ __('Reports') }}
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item {{ Nav::isRoute('reports.monthly') }}">
+            <a class="nav-link" href="{{ route('reports.monthly') }}">
+                <i class="fas fa-fw fa-file-invoice"></i>
+                <span>{{ __('Monthly Report') }}</span>
+            </a>
+        </li>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item {{ Nav::isRoute('reports.yearly') }}">
+            <a class="nav-link" href="{{ route('reports.product') }}">
+                <i class="fas fa-fw fa-file-invoice"></i>
+                <span>{{ __('Products Report') }}</span>
+            </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
             {{ __('Settings') }}
         </div>
 
