@@ -15,7 +15,7 @@ Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::put('/profile', 'ProfileController@update')->name('profile.update');
 
 // Categories Routes
-Route::group(['prefix' => 'categories', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'categories', 'middleware' => 'auth', 'middleware' => 'role:Admin'], function() {
     Route::get('/', 'CategoryController@index')->name('categories.index');
     Route::get('/create', 'CategoryController@create')->name('categories.create');
     Route::post('/', 'CategoryController@store')->name('categories.store');
@@ -27,15 +27,15 @@ Route::group(['prefix' => 'categories', 'middleware' => 'auth'], function() {
 // Products Routes
 Route::group(['prefix' => 'products', 'middleware' => 'auth'], function() {
     Route::get('/', 'ProductController@index')->name('products.index');
-    Route::get('/create', 'ProductController@create')->name('products.create');
-    Route::post('/', 'ProductController@store')->name('products.store');
+    Route::get('/create', 'ProductController@create')->name('products.create')->middleware('permission:Add Products');
+    Route::post('/', 'ProductController@store')->name('products.store')->middleware('permission:Add Products');
     Route::get('/{id}/edit', 'ProductController@edit')->name('products.edit');
     Route::put('/{id}', 'ProductController@update')->name('products.update');
-    Route::delete('/{id}', 'ProductController@destroy')->name('products.destroy');
+    Route::delete('/{id}', 'ProductController@destroy')->name('products.destroy')->middleware('permission:Delete Products');
 });
 
 // Transactions Routes
-Route::group(['prefix' => 'transactions', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'transactions', 'middleware' => 'auth', 'middleware' => 'permission:Transaction'], function() {
     Route::get('/', 'TransactionController@index')->name('transactions.index');
     Route::get('/create', 'TransactionController@create')->name('transactions.create');
     Route::post('/', 'TransactionController@store')->name('transactions.store');
@@ -44,17 +44,13 @@ Route::group(['prefix' => 'transactions', 'middleware' => 'auth'], function() {
 });
 
 // Reports Routes
-Route::group(['prefix' => 'reports', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'reports', 'middleware' => 'auth', 'middleware' => 'permission:Report Access'], function() {
     Route::get('/monthly', 'ReportController@monthlyReport')->name('reports.monthly');
     Route::get('/products', 'ReportController@productReport')->name('reports.product');
 });
 
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
-
 // Roles Routes
-Route::group(['prefix' => 'roles', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'roles', 'middleware' => 'auth', 'middleware' => 'role:Admin'], function() {
     Route::get('/', 'RoleController@index')->name('roles.index');
     Route::get('/create', 'RoleController@create')->name('roles.create');
     Route::post('/', 'RoleController@store')->name('roles.store');
@@ -64,7 +60,7 @@ Route::group(['prefix' => 'roles', 'middleware' => 'auth'], function() {
 });
 
 // Permissions Routes
-Route::group(['prefix' => 'permissions', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'permissions', 'middleware' => 'auth', 'middleware' => 'role:Admin'], function() {
     Route::get('/', 'PermissionController@index')->name('permissions.index');
     Route::get('/create', 'PermissionController@create')->name('permissions.create');
     Route::post('/', 'PermissionController@store')->name('permissions.store');
@@ -74,9 +70,14 @@ Route::group(['prefix' => 'permissions', 'middleware' => 'auth'], function() {
 });
 
 // Users Routes
-Route::group(['prefix' => 'users', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'users', 'middleware' => 'auth', 'middleware' => 'role:Admin|Leader'], function() {
     Route::get('/', 'UserController@index')->name('users.index');
     Route::get('/{id}/edit', 'UserController@edit')->name('users.edit');
     Route::put('/{id}', 'UserController@update')->name('users.update');
     Route::delete('/{id}', 'UserController@destroy')->name('users.destroy');
 });
+
+
+Route::get('/about', function () {
+    return view('about');
+})->name('about');

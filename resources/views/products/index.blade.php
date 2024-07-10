@@ -33,6 +33,7 @@
     </div>
 </div>
 
+@if(count($products))
 <div class="row">
     @foreach ($products as $product)
     <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
@@ -56,6 +57,15 @@
     </div>
     @endforeach
 </div>
+@else
+<div class="row">
+    <div class="col-lg-12 mb-4">
+        <div class="text-center">
+            <p>Data tidak ditemukan.</p>
+        </div>
+    </div>
+</div>
+@endif
 
 <div class="row">
     <div class="col-lg-12 mb-4">

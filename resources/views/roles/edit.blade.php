@@ -52,11 +52,14 @@
                     </div>
                     <div class="form-group">
                         <label for="permissions">Permissions</label>
-                        <select name="permissions[]" id="permissions" class="form-control" multiple>
-                            @foreach($permissions as $permission)
-                                <option value="{{ $permission->id }}" {{ $role->permissions->contains($permission->id) ? 'selected' : '' }}>{{ $permission->name }}</option>
-                            @endforeach
-                        </select>
+                        @foreach($permissions as $permission)
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="permissions[]" id="permission-{{ $permission->id }}" value="{{ $permission->id }}" {{ $role->permissions->contains($permission->id) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="permission-{{ $permission->id }}">
+                                    {{ $permission->name }}
+                                </label>
+                            </div>
+                        @endforeach
                     </div>
                     <div class="d-flex justify-content-between">
                         <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>

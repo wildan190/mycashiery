@@ -36,6 +36,7 @@
                                 <th>{{ __('Name') }}</th>
                                 <th>{{ __('Email') }}</th>
                                 <th>{{ __('Roles') }}</th>
+                                <th>{{ __('Email Verified') }}</th>
                                 <th>{{ __('Created At') }}</th>
                                 <th>{{ __('Updated At') }}</th>
                                 <th>{{ __('Action') }}</th>
@@ -48,6 +49,11 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->roles->pluck('name')->join(', ') }}</td>
+                                <td>
+                                    <span class="badge {{ $user->email_verified_at ? 'badge-success' : 'badge-danger' }}">
+                                        {{ $user->email_verified_at ? 'Verified' : 'Unverified' }}
+                                    </span>
+                                </td>
                                 <td>{{ $user->created_at }}</td>
                                 <td>{{ $user->updated_at }}</td>
                                 <td>

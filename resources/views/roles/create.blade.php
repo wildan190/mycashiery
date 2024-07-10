@@ -51,12 +51,11 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="permissions">Permissions</label>
-                        <select name="permissions[]" id="permissions" class="form-control" multiple>
-                            @foreach($permissions as $permission)
-                                <option value="{{ $permission->id }}">{{ $permission->name }}</option>
-                            @endforeach
-                        </select>
+                        <label for="permissions">Permissions</label><br>
+                        @foreach($permissions as $permission)
+                            <input type="checkbox" name="permissions[]" value="{{ $permission->id }}" id="permissions">
+                            <label for="permissions">{{ $permission->name }}</label><br>
+                        @endforeach
                     </div>
                     <div class="d-flex justify-content-between">
                         <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>

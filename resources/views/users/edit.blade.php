@@ -61,12 +61,23 @@
                     </div>
                     <div class="form-group">
                         <label for="roles">Roles</label>
-                        <select name="roles[]" id="roles" class="form-control" multiple>
-                            @foreach($roles as $role)
-                                <option value="{{ $role->id }}" {{ $user->roles->contains($role->id) ? 'selected' : '' }}>{{ $role->name }}</option>
-                            @endforeach
-                        </select>
+                        @foreach($roles as $role)
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="roles[]" id="role-{{ $role->id }}" value="{{ $role->id }}" {{ $user->roles->contains($role->id) ? 'checked' : '' }} onchange="checkRole(this)">
+                                <label class="form-check-label" for="role-{{ $role->id }}">
+                                    {{ $role->name }}
+                                </label>
+                            </div>
+                        @endforeach
                     </div>
+                    <script>
+                        function checkRole(checkbox) {
+                            if($("input[name='roles[]']:checked").length > 1 && checkbox.checked) {
+                                alert("Hanya bisa pilih salah satu");
+                                checkbox.checked = false;
+                            }
+                        }
+                    </script>
                     <div class="d-flex justify-content-between">
                         <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
                         <a href="{{ route('users.index') }}" class="btn btn-danger">{{ __('Cancel') }}</a>
