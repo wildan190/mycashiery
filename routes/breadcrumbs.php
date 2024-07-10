@@ -97,4 +97,8 @@ Breadcrumbs::for('users.edit', function (BreadcrumbTrail $trail, $user) {
     $trail->push('Edit', route('users.edit', $user));
 });
 
+Breadcrumbs::for('profile', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Profile', route('profile'));
+});
 
