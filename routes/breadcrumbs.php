@@ -57,4 +57,44 @@ Breadcrumbs::for('reports.products', function (BreadcrumbTrail $trail) {
     $trail->push('Laporan Produk', route('reports.product'));
 });
 
+Breadcrumbs::for('roles.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Roles', route('roles.index'));
+});
+
+Breadcrumbs::for('roles.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('roles.index');
+    $trail->push('Create', route('roles.create'));
+});
+
+Breadcrumbs::for('roles.edit', function (BreadcrumbTrail $trail, $role) {
+    $trail->parent('roles.index');
+    $trail->push('Edit', route('roles.edit', $role));
+});
+
+Breadcrumbs::for('permissions.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Permissions', route('permissions.index'));
+});
+
+Breadcrumbs::for('permissions.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('permissions.index');
+    $trail->push('Create', route('permissions.create'));
+});
+
+Breadcrumbs::for('permissions.edit', function (BreadcrumbTrail $trail, $permission) {
+    $trail->parent('permissions.index');
+    $trail->push('Edit', route('permissions.edit', $permission));
+});
+
+Breadcrumbs::for('users.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Users', route('users.index'));
+});
+
+Breadcrumbs::for('users.edit', function (BreadcrumbTrail $trail, $user) {
+    $trail->parent('users.index');
+    $trail->push('Edit', route('users.edit', $user));
+});
+
 

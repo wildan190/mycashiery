@@ -63,6 +63,14 @@
             </a>
         </li>
 
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            {{ __('Management') }}
+        </div>
+
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item {{ Nav::isRoute(['products.index', 'categories.index']) }}">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseManagement"
@@ -116,6 +124,38 @@
                 <span>{{ __('Profile') }}</span>
             </a>
         </li>
+
+        <!-- Nav Item - Role -->
+        <li class="nav-item {{ Nav::isRoute('roles.index') }}">
+            <a class="nav-link" href="{{ route('roles.index') }}">
+                <i class="fas fa-fw fa-users-cog"></i>
+                <span>{{ __('Role') }}</span>
+            </a>
+        </li>
+
+        <!-- Nav Item - Permission -->
+         <li class="nav-item {{ Nav::isRoute('permissions.index') }}">
+            <a class="nav-link" href="{{ route('permissions.index') }}">
+                <i class="fas fa-fw fa-user-shield"></i>
+                <span>{{ __('Permission') }}</span>
+            </a>
+        </li>
+
+        <!-- Nav Item - User -->
+        <li class="nav-item {{ Nav::isRoute('users.index') }}">
+            <a class="nav-link" href="{{ route('users.index') }}">
+                <i class="fas fa-fw fa-users"></i>
+                <span>{{ __('User') }}</span>
+            </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            {{ __('About') }}
+        </div>
 
         <!-- Nav Item - About -->
         <li class="nav-item {{ Nav::isRoute('about') }}">
