@@ -42,7 +42,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="product_name">{{ __('Product Name') }}</label>
-                        <input type="text" name="product_name" class="form-control @error('product_name') is-invalid @enderror" id="product_name" value="{{ old('product_name') }}" required>
+                        <input type="text" name="product_name" class="form-control @error('product_name') is-invalid @enderror" id="product_name" placeholder="{{ __('Product Name') }}" value="{{ old('product_name') }}" required>
                         @error('product_name')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -90,7 +90,10 @@
                             </div>
                         @enderror
                     </div>
-                    <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
+                        <a href="{{ route('products.index') }}" class="btn btn-danger">{{ __('Cancel') }}</a>
+                    </div>
                 </form>
             </div>
         </div>

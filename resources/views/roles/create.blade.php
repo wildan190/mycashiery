@@ -43,7 +43,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="name">Role Name</label>
-                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}" required>
+                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}" placeholder="{{ __('Role Name') }}" required>
                         @error('name')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -58,7 +58,10 @@
                             @endforeach
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
+                        <a href="{{ route('roles.index') }}" class="btn btn-danger">{{ __('Cancel') }}</a>
+                    </div>
                 </form>
             </div>
         </div>

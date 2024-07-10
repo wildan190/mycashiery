@@ -29,13 +29,16 @@
                     @csrf
                     <div class="form-group">
                         <label for="name">{{ __('Name') }}</label>
-                        <input type="text" name="name" id="name" class="form-control" required>
+                        <input type="text" name="name" id="name" class="form-control" placeholder="{{ __('Name') }}" required>
                     </div>
                     <div class="form-group">
                         <label for="description">{{ __('Description') }}</label>
                         <textarea name="description" id="description" class="form-control" rows="5"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
+                        <a href="{{ route('categories.index') }}" class="btn btn-danger">{{ __('Cancel') }}</a>
+                    </div>
                 </form>
             </div>
         </div>
