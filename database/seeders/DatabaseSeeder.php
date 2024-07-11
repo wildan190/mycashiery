@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
        //memanggil seeder - seeder disini
         $this->call([
             RoleSeeder::class,
+            PermissionSeeder::class,
             CategorySeeder::class,
         ]);
     }
