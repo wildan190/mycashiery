@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Repositories\CategoryRepository;
 use App\Models\UserLog;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\UserActionNotification;
 use Yajra\DataTables\Contracts\DataTables;
 
 class CategoryController extends Controller
@@ -44,6 +45,9 @@ class CategoryController extends Controller
             'details' => 'Created category: ' . $categories['name'],
         ]);
 
+
+        $request->user()->notify(new UserActionNotification('created', 'Created category: ' . $categories['name']));
+
         return redirect()->route('categories.index');
     }
 
@@ -69,6 +73,8 @@ class CategoryController extends Controller
             'details' => 'Updated category: ' . $categories['name'],
         ]);
 
+        $request->user()->notify(new UserActionNotification('updated', 'Updated category: ' . $categories['name']));
+
         return redirect()->route('categories.index');
     }
 
@@ -82,6 +88,8 @@ class CategoryController extends Controller
             'action' => 'delete',
             'details' => 'Deleted category: ' . $id,
         ]);
+
+        $this->user()->notify(new UserActionNotification('deleted', 'Deleted category: ' . $id));
 
         return redirect()->route('categories.index');
     }

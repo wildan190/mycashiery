@@ -10,6 +10,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/notifications/read/{id}', 'NotificationController@markAsRead')->name('notifications.read');
+Route::get('/notifications/mark-all-read', 'NotificationController@markAllAsRead')->name('notifications.markAllRead');
+
 
 Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::put('/profile', 'ProfileController@update')->name('profile.update');
@@ -81,7 +84,6 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth', 'middleware' => 'role
 Route::group(['prefix' => 'logs', 'middleware' => 'auth', 'middleware' => 'role:Admin'], function() {
     Route::get('/', 'UserLogController@index')->name('logs.index');
 });
-
 
 Route::get('/about', function () {
     return view('about');
