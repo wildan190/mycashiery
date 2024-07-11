@@ -102,3 +102,7 @@ Breadcrumbs::for('profile', function (BreadcrumbTrail $trail) {
     $trail->push('Profile', route('profile'));
 });
 
+Breadcrumbs::for('logs.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('Logs', route('logs.index'));
+});

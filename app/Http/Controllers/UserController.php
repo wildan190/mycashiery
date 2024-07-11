@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\UserLog;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -46,6 +48,13 @@ class UserController extends Controller
             $user->syncRoles($roles);
         }
 
+        // Logging
+        UserLog::create([
+            'user_id' => Auth::id(),
+            'action' => 'create',
+            'details' => 'Created user: ' . $user->name,
+        ]);
+
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
 
@@ -53,6 +62,14 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
+
+        // Logging
+        UserLog::create([
+            'user_id' => Auth::id(),
+            'action' => 'delete',
+            'details' => 'Deleted user: ' . $user->name,
+        ]);
+        
         return redirect()->route('users.index')->with('success', 'User deleted successfully.');
     }
 }

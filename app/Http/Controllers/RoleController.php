@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use App\Models\UserLog;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
@@ -35,6 +37,13 @@ class RoleController extends Controller
             $role->syncPermissions($permissions);
         }
 
+        // Logging
+        UserLog::create([
+            'user_id' => Auth::id(),
+            'action' => 'create',
+            'details' => 'Created role: ' . $role->name,
+        ]);
+
         return redirect()->route('roles.index')->with('success', 'Role created successfully.');
     }
 
@@ -61,6 +70,13 @@ class RoleController extends Controller
             $role->syncPermissions($permissions);
         }
 
+        // Logging
+        UserLog::create([
+            'user_id' => Auth::id(),
+            'action' => 'create',
+            'details' => 'Created role: ' . $role->name,
+        ]);
+
         return redirect()->route('roles.index')->with('success', 'Role updated successfully.');
     }
 
@@ -68,6 +84,14 @@ class RoleController extends Controller
     {
         $role = Role::findOrFail($id);
         $role->delete();
+
+        // Logging
+        UserLog::create([
+            'user_id' => Auth::id(),
+            'action' => 'delete',
+            'details' => 'Deleted role: ' . $role->name,
+        ]);
+
         return redirect()->route('roles.index')->with('success', 'Role deleted successfully.');
     }
 }
