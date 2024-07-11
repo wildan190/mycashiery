@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Midtrans\Config;
 use Midtrans\Snap;
 use Midtrans\Notification;
+use App\Models\UserLog;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 
 class TransactionController extends Controller
@@ -38,6 +40,13 @@ class TransactionController extends Controller
 
         $snapToken = $this->getSnapToken($request, $transaction);
 
+        //log user activity
+        UserLog::create([
+            'user_id' => Auth::id(),
+            'action' => 'create',
+            'details' => 'Created transaction: ' . $transaction->transaction_number,
+        ]);
+
         return view('transactions.snap', compact('snapToken'));
     }
 
@@ -45,6 +54,13 @@ class TransactionController extends Controller
     {
         $pdf = PDF::loadView('transactions.print', compact('transaction'))
             ->setPaper('a7', 'portrait');
+
+        //log user activity
+        UserLog::create([
+            'user_id' => Auth::id(),
+            'action' => 'print',
+            'details' => 'Printed transaction: ' . $transaction->transaction_number,
+        ]);
 
         return $pdf->download('transaction_receipt.pdf');
     }

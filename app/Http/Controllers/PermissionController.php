@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\UserLog;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
@@ -21,6 +23,13 @@ class PermissionController extends Controller
     public function store(Request $request)
     {
         Permission::create(['name' => $request->name]);
+
+        //logging
+        UserLog::create([
+            'user_id' => Auth::id(),
+            'action' => 'create',
+            'details' => 'Created permission: ' . $request->name,
+        ]);
         
         return redirect()->route('permissions.index');
     }
@@ -35,6 +44,13 @@ class PermissionController extends Controller
     {
         $permission = Permission::find($id);
         $permission->update(['name' => $request->name]);
+
+        //logging
+        UserLog::create([
+            'user_id' => Auth::id(),
+            'action' => 'update',
+            'details' => 'Updated permission: ' . $request->name,
+        ]);
         
         return redirect()->route('permissions.index');
     }
@@ -43,6 +59,13 @@ class PermissionController extends Controller
     {
         $permission = Permission::find($id);
         $permission->delete();
+
+        //logging
+        UserLog::create([
+            'user_id' => Auth::id(),
+            'action' => 'delete',
+            'details' => 'Deleted permission: ' . $permission->name,
+        ]);
         
         return redirect()->route('permissions.index');
     }

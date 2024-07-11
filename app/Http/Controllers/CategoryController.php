@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repositories\CategoryRepository;
+use App\Models\UserLog;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Contracts\DataTables;
 
 class CategoryController extends Controller
@@ -34,6 +36,14 @@ class CategoryController extends Controller
         ]);
 
         $categories = $this->categoryRepository->create($categories);
+
+        // Logging
+        UserLog::create([
+            'user_id' => Auth::id(),
+            'action' => 'create',
+            'details' => 'Created category: ' . $categories['name'],
+        ]);
+
         return redirect()->route('categories.index');
     }
 
@@ -51,12 +61,28 @@ class CategoryController extends Controller
         ]);
 
         $categories = $this->categoryRepository->update($id, $categories);
+
+        // Logging
+        UserLog::create([
+            'user_id' => Auth::id(),
+            'action' => 'update',
+            'details' => 'Updated category: ' . $categories['name'],
+        ]);
+
         return redirect()->route('categories.index');
     }
 
     public function destroy($id)
     {
         $this->categoryRepository->delete($id);
+
+        // Logging
+        UserLog::create([
+            'user_id' => Auth::id(),
+            'action' => 'delete',
+            'details' => 'Deleted category: ' . $id,
+        ]);
+
         return redirect()->route('categories.index');
     }
     

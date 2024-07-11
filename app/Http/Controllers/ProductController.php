@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repositories\Interfaces\ProductRepositoryInterface;
 use App\Models\Category;
+use App\Models\UserLog;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -41,6 +43,13 @@ class ProductController extends Controller
         $this->processPicture($request, $data);
         $this->productRepository->create($data);
 
+        // Logging
+        UserLog::create([
+            'user_id' => Auth::id(),
+            'action' => 'create',
+            'details' => 'Created product: ' . $data['product_name'],
+        ]);
+
         return redirect()->route('products.index')->with('success', 'Product created successfully.');
     }
 
@@ -64,6 +73,13 @@ class ProductController extends Controller
         $this->processPicture($request, $data);
         $this->productRepository->update($id, $data);
 
+        // Logging
+        UserLog::create([
+            'user_id' => Auth::id(),
+            'action' => 'update',
+            'details' => 'Updated product: ' . $data['product_name'],
+        ]);
+
         return redirect()->route('products.index')->with('success', 'Product updated successfully.');
     }
 
@@ -72,6 +88,14 @@ class ProductController extends Controller
         $product = $this->productRepository->find($id);
         $this->deletePicture($product);
         $this->productRepository->delete($id);
+
+        // Logging
+        UserLog::create([
+            'user_id' => Auth::id(),
+            'action' => 'delete',
+            'details' => 'Deleted product: ' . $product->product_name,
+        ]);
+        
         return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
     }
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
+use App\Models\UserLog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -45,6 +47,13 @@ class ProfileController extends Controller
         }
 
         $user->save();
+
+        // Logging
+        UserLog::create([
+            'user_id' => Auth::id(),
+            'action' => 'update',
+            'details' => 'Updated profile: ' . $user->name,
+        ]);
 
         return redirect()->route('profile')->withSuccess('Profile updated successfully.');
     }

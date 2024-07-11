@@ -77,6 +77,11 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth', 'middleware' => 'role
     Route::delete('/{id}', 'UserController@destroy')->name('users.destroy');
 });
 
+// Log Routes
+Route::group(['prefix' => 'logs', 'middleware' => 'auth', 'middleware' => 'role:Admin'], function() {
+    Route::get('/', 'UserLogController@index')->name('logs.index');
+});
+
 
 Route::get('/about', function () {
     return view('about');
