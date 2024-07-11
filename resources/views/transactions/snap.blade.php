@@ -21,7 +21,7 @@
 
 <div class="row">
     <div class="col-lg-12 mb-4">
-        <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
+        <script src="https://app.midtrans.com/snap/snap.js" data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
         <script type="text/javascript">
             window.snap.pay('{{ $snapToken }}', {
                 onSuccess: function(result){
