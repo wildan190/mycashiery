@@ -82,11 +82,14 @@
                 <div id="collapseManagement" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item {{ Nav::isRoute('products.index') }}" href="{{ route('products.index') }}">{{ __('Products') }}</a>
+                        @if(Auth::user()->hasRole('Admin'))
                         <a class="collapse-item {{ Nav::isRoute('categories.index') }}" href="{{ route('categories.index') }}">{{ __('Categories') }}</a>
+                        @endif
                     </div>
                 </div>
             </li>
 
+            @if(Auth::user()->hasPermissionTo('Report Access'))
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -94,7 +97,6 @@
             <div class="sidebar-heading">
                 {{ __('Reports') }}
             </div>
-
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item {{ Nav::isRoute(['reports.monthly', 'reports.product']) }}">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReports" aria-expanded="true" aria-controls="collapseReports">
@@ -108,6 +110,7 @@
                     </div>
                 </div>
             </li>
+            @endif
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -125,6 +128,7 @@
                 </a>
             </li>
 
+            @if(Auth::user()->hasRole('Admin'))
             <!-- Nav Item - Role -->
             <li class="nav-item {{ Nav::isRoute('roles.index') }}">
                 <a class="nav-link" href="{{ route('roles.index') }}">
@@ -140,7 +144,10 @@
                     <span>{{ __('Permission') }}</span>
                 </a>
             </li>
+            @endif
 
+            
+            @if(Auth::user()->hasPermissionTo('Assign Role User'))
             <!-- Nav Item - User -->
             <li class="nav-item {{ Nav::isRoute('users.index') }}">
                 <a class="nav-link" href="{{ route('users.index') }}">
@@ -148,6 +155,7 @@
                     <span>{{ __('User') }}</span>
                 </a>
             </li>
+            @endif
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -275,10 +283,12 @@
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     {{ __('Profile') }}
                                 </a>
+                                @if(Auth::user()->hasRole('Admin'))
                                 <a class="dropdown-item" href="{{route('logs.index')}}">
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                     {{ __('Activity Log') }}
                                 </a>
+                                @endif
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

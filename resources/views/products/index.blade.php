@@ -22,6 +22,7 @@
 </div>
 @endif
 
+@if(Auth::user()->hasPermissionTo('Add Products'))
 <div class="row">
     <div class="col-lg-6 mb-4">
         <a href="{{ route('products.create') }}" class="btn btn-primary btn-icon-split">
@@ -32,6 +33,7 @@
         </a>
     </div>
 </div>
+@endif
 
 @if(count($products))
 <div class="row">
@@ -45,13 +47,15 @@
                 <h4 class="card-title mb-0">{{ $product->product_name }}</h4>
                 <p class="card-text text-muted mb-0">{{ $product->category->name }}</p>
                 <p class="card-text text-muted mb-0">Stok: {{ $product->product_stock }}</p>
-                <p class="card-text">Rp. {{ number_format($product->price, 2) }}</p>    
+                <p class="card-text">Rp. {{ number_format($product->price, 2) }}</p>
                 <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                @if(Auth::user()->hasPermissionTo('Delete Products'))
                 <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="d-inline">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                 </form>
+                @endif
             </div>
         </div>
     </div>
