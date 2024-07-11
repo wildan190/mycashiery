@@ -2,6 +2,8 @@
 
 @section('main-content')
 
+{{ Breadcrumbs::render('reports.products') }}
+
 <!-- Page Heading -->
 <h1 class="h3 mb-4 text-gray-800">{{ __('Products Report') }}</h1>
 

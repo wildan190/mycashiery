@@ -2,6 +2,8 @@
 
 @section('main-content')
 
+{{ Breadcrumbs::render('products.edit', $product) }}
+
 <!-- Page Heading -->
 <h1 class="h3 mb-4 text-gray-800">{{ __('Products') }}</h1>
 
@@ -91,7 +93,10 @@
                             </div>
                         @enderror
                     </div>
-                    <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
+                        <a href="{{ route('products.index') }}" class="btn btn-danger">{{ __('Cancel') }}</a>
+                    </div>
                 </form>
             </div>
         </div>

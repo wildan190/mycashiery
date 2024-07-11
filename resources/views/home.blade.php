@@ -2,6 +2,7 @@
 
 @section('main-content')
 
+{{ Breadcrumbs::render('home') }}
 <!-- Page Heading -->
 <h1 class="h3 mb-4 text-gray-800">{{ __('Dashboard') }}</h1>
 
@@ -71,8 +72,8 @@
     </div>
 </div>
 
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ asset('js/dashboard.js') }}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Monthly Sales Data

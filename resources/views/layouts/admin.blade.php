@@ -32,7 +32,7 @@
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/home') }}">
             <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
+                <i class="fas fa-coins"></i>
             </div>
             <div class="sidebar-brand-text mx-3">MyCashiery</div>
         </a>
@@ -72,19 +72,18 @@
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item {{ Nav::isRoute('products.index') }}">
-            <a class="nav-link" href="{{ route('products.index') }}">
-                <i class="fas fa-fw fa-boxes"></i>
-                <span>{{ __('Products') }}</span>
+        <li class="nav-item {{ Nav::isRoute(['products.index', 'categories.index']) }}">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseManagement"
+                aria-expanded="true" aria-controls="collapseManagement">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>{{ __('Management') }}</span>
             </a>
-        </li>
-
-        <!-- Nav Item - Utilities Collapse Menu -->
-        <li class="nav-item {{ Nav::isRoute('categories.index') }}">
-            <a class="nav-link" href="{{ route('categories.index') }}">
-                <i class="fas fa-fw fa-list"></i>
-                <span>{{ __('Categories') }}</span>
-            </a>
+            <div id="collapseManagement" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item {{ Nav::isRoute('products.index') }}" href="{{ route('products.index') }}">{{ __('Products') }}</a>
+                    <a class="collapse-item {{ Nav::isRoute('categories.index') }}" href="{{ route('categories.index') }}">{{ __('Categories') }}</a>
+                </div>
+            </div>
         </li>
 
         <!-- Divider -->
@@ -96,19 +95,18 @@
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item {{ Nav::isRoute('reports.monthly') }}">
-            <a class="nav-link" href="{{ route('reports.monthly') }}">
-                <i class="fas fa-fw fa-file-invoice"></i>
-                <span>{{ __('Monthly Report') }}</span>
+        <li class="nav-item {{ Nav::isRoute(['reports.monthly', 'reports.product']) }}">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReports"
+                aria-expanded="true" aria-controls="collapseReports">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>{{ __('Reports') }}</span>
             </a>
-        </li>
-
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item {{ Nav::isRoute('reports.yearly') }}">
-            <a class="nav-link" href="{{ route('reports.product') }}">
-                <i class="fas fa-fw fa-file-invoice"></i>
-                <span>{{ __('Products Report') }}</span>
-            </a>
+            <div id="collapseReports" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item {{ Nav::isRoute('reports.monthly') }}" href="{{ route('reports.monthly') }}">{{ __('Monthly Report') }}</a>
+                    <a class="collapse-item {{ Nav::isRoute('reports.product') }}" href="{{ route('reports.product') }}">{{ __('Products Report') }}</a>
+                </div>
+            </div>
         </li>
 
         <!-- Divider -->
@@ -126,6 +124,38 @@
                 <span>{{ __('Profile') }}</span>
             </a>
         </li>
+
+        <!-- Nav Item - Role -->
+        <li class="nav-item {{ Nav::isRoute('roles.index') }}">
+            <a class="nav-link" href="{{ route('roles.index') }}">
+                <i class="fas fa-fw fa-users-cog"></i>
+                <span>{{ __('Role') }}</span>
+            </a>
+        </li>
+
+        <!-- Nav Item - Permission -->
+         <li class="nav-item {{ Nav::isRoute('permissions.index') }}">
+            <a class="nav-link" href="{{ route('permissions.index') }}">
+                <i class="fas fa-fw fa-user-shield"></i>
+                <span>{{ __('Permission') }}</span>
+            </a>
+        </li>
+
+        <!-- Nav Item - User -->
+        <li class="nav-item {{ Nav::isRoute('users.index') }}">
+            <a class="nav-link" href="{{ route('users.index') }}">
+                <i class="fas fa-fw fa-users"></i>
+                <span>{{ __('User') }}</span>
+            </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            {{ __('About') }}
+        </div>
 
         <!-- Nav Item - About -->
         <li class="nav-item {{ Nav::isRoute('about') }}">

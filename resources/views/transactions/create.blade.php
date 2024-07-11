@@ -2,6 +2,8 @@
 
 @section('main-content')
 
+{{ Breadcrumbs::render('transactions.create') }}
+
 <!-- Page Heading -->
 <h1 class="h3 mb-4 text-gray-800">{{ __('Create Transaction') }}</h1>
 
@@ -31,20 +33,20 @@
                                 <input type="text" id="search-product" class="mb-4 p-2 border rounded-md w-full" placeholder="Search Product...">
                                 <div id="product-grid" class="grid grid-cols-4 gap-4 mb-4">
                                     @foreach ($products->chunk(4) as $chunk)
-                                        <div class="row">
-                                            @foreach ($chunk as $product)
-                                                <div class="col-md-3">
-                                                    <div class="card mb-4 shadow-sm rounded-md border-0 bg-white" style="width: 10rem;">
-                                                        <img src="{{ asset('storage/' . $product->picture) }}" alt="{{ $product->product_name }}" class="card-img-top" style="height: 10rem;">
-                                                        <div class="card-body">
-                                                            <h5 class="card-title text-truncate">{{ $product->product_name }}</h5>
-                                                            <p class="card-text text-truncate">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
-                                                            <button class="btn btn-primary btn-sm add-product-btn" data-product-id="{{ $product->id }}" data-product-name="{{ $product->product_name }}" data-product-price="{{ $product->price }}">Add</button>
-                                                        </div>
-                                                    </div>
+                                    <div class="row">
+                                        @foreach ($chunk as $product)
+                                        <div class="col-md-3">
+                                            <div class="card mb-4 shadow-sm rounded-md border-0 bg-white" style="width: 10rem;">
+                                                <img src="{{ asset('storage/' . $product->picture) }}" alt="{{ $product->product_name }}" class="card-img-top" style="height: 10rem;">
+                                                <div class="card-body">
+                                                    <h5 class="card-title text-truncate">{{ $product->product_name }}</h5>
+                                                    <p class="card-text text-truncate">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
+                                                    <button class="btn btn-primary btn-sm add-product-btn" data-product-id="{{ $product->id }}" data-product-name="{{ $product->product_name }}" data-product-price="{{ $product->price }}">Add</button>
                                                 </div>
-                                            @endforeach
+                                            </div>
                                         </div>
+                                        @endforeach
+                                    </div>
                                     @endforeach
                                 </div>
                                 {{ $products->links('pagination::bootstrap-4') }}
@@ -71,7 +73,10 @@
                                 <div id="total-price" class="text-lg font-medium text-gray-900 mt-4">
                                     Total Price: <span id="total-price-value">Rp0</span>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Create Transaction</button>
+                                <div class="d-flex justify-content-between">
+                                    <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
+                                    <a href="{{ route('transactions.index') }}" class="btn btn-danger">{{ __('Cancel') }}</a>
+                                </div>
                             </form>
                         </div>
                     </div>

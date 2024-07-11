@@ -1,10 +1,10 @@
 @extends('layouts.admin')
-
 @section('main-content')
 
-{{ Breadcrumbs::render('categories.index') }}
+{{ Breadcrumbs::render('users.index') }}
+
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">{{ __('Categories') }}</h1>
+<h1 class="h3 mb-4 text-gray-800">{{ __('Users') }}</h1>
 
 @if (session('success'))
 <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
@@ -22,45 +22,42 @@
 @endif
 
 <div class="row">
-    <div class="col-lg-6 mb-4">
-        <a href="{{ route('categories.create') }}" class="btn btn-primary btn-icon-split">
-            <span class="icon text-white-50">
-                <i class="fas fa-plus"></i>
-            </span>
-            <span class="text">{{ __('Create Category') }}</span>
-        </a>
-    </div>
-</div>
-
-<div class="row">
     <div class="col-lg-12 mb-4">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">{{ __('Categories') }}</h6>
+                <h6 class="m-0 font-weight-bold text-primary">{{ __('Users') }}</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="categoriesTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="usersTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>{{ __('No.') }}</th>
                                 <th>{{ __('Name') }}</th>
-                                <th>{{ __('Description') }}</th>
+                                <th>{{ __('Email') }}</th>
+                                <th>{{ __('Roles') }}</th>
+                                <th>{{ __('Email Verified') }}</th>
                                 <th>{{ __('Created At') }}</th>
                                 <th>{{ __('Updated At') }}</th>
                                 <th>{{ __('Action') }}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($categories as $category)
+                            @foreach ($users as $user)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $category->name }}</td>
-                                <td>{{ $category->description }}</td>
-                                <td>{{ $category->created_at }}</td>
-                                <td>{{ $category->updated_at }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->roles->pluck('name')->join(', ') }}</td>
                                 <td>
-                                    <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-primary btn-circle">
+                                    <span class="badge {{ $user->email_verified_at ? 'badge-success' : 'badge-danger' }}">
+                                        {{ $user->email_verified_at ? 'Verified' : 'Unverified' }}
+                                    </span>
+                                </td>
+                                <td>{{ $user->created_at }}</td>
+                                <td>{{ $user->updated_at }}</td>
+                                <td>
+                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary btn-circle">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                 </td>
@@ -77,8 +74,9 @@
 <div class="row">
     <div class="col-lg-12 mb-4">
         <div class="mx-auto">
-            {!! $categories->links() !!}
+            {!! $users->links() !!}
         </div>
     </div>
 </div>
 @endsection
+
