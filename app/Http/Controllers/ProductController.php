@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Repositories\Interfaces\ProductRepositoryInterface;
 use App\Models\Category;
 use App\Models\UserLog;
+use App\Notifications\UserActionNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -50,6 +51,8 @@ class ProductController extends Controller
             'details' => 'Created product: ' . $data['product_name'],
         ]);
 
+        Auth::user()->notify(new UserActionNotification('created', 'Created product: ' . $data['product_name']));
+
         return redirect()->route('products.index')->with('success', 'Product created successfully.');
     }
 
@@ -80,6 +83,8 @@ class ProductController extends Controller
             'details' => 'Updated product: ' . $data['product_name'],
         ]);
 
+        Auth::user()->notify(new UserActionNotification('updated', 'Updated product: ' . $data['product_name']));
+
         return redirect()->route('products.index')->with('success', 'Product updated successfully.');
     }
 
@@ -95,6 +100,8 @@ class ProductController extends Controller
             'action' => 'delete',
             'details' => 'Deleted product: ' . $product->product_name,
         ]);
+
+        Auth::user()->notify(new UserActionNotification('deleted', 'Deleted product: ' . $product->product_name));
         
         return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
     }

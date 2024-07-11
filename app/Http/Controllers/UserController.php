@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserLog;
+use App\Notifications\UserActionNotification;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
@@ -55,6 +56,8 @@ class UserController extends Controller
             'details' => 'Created user: ' . $user->name,
         ]);
 
+        Auth::user()->notify(new UserActionNotification('updated', 'Updated user: ' . $user->name));
+
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
 
@@ -69,6 +72,8 @@ class UserController extends Controller
             'action' => 'delete',
             'details' => 'Deleted user: ' . $user->name,
         ]);
+
+        Auth::user()->notify(new UserActionNotification('deleted', 'Deleted user: ' . $user->name));
         
         return redirect()->route('users.index')->with('success', 'User deleted successfully.');
     }

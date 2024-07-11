@@ -6,8 +6,10 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use App\Models\UserLog;
+use App\Notifications\UserActionNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -54,6 +56,8 @@ class ProfileController extends Controller
             'action' => 'update',
             'details' => 'Updated profile: ' . $user->name,
         ]);
+
+        Auth::user()->notify(new UserActionNotification('updated', 'Updated Profile: ' . $user->name));
 
         return redirect()->route('profile')->withSuccess('Profile updated successfully.');
     }
