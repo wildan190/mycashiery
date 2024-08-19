@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-       //memanggil seeder - seeder disini
+        //memanggil seeder - seeder disini
         $this->call([
             RoleSeeder::class,
             PermissionSeeder::class,

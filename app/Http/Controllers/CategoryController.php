@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Repositories\CategoryRepository;
 use App\Models\UserLog;
-use Illuminate\Support\Facades\Auth;
 use App\Notifications\UserActionNotification;
-use Yajra\DataTables\Contracts\DataTables;
+use App\Repositories\CategoryRepository;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -21,6 +20,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = $this->categoryRepository->getAll();
+
         return view('categories.index', compact('categories'));
     }
 
@@ -42,11 +42,10 @@ class CategoryController extends Controller
         UserLog::create([
             'user_id' => Auth::id(),
             'action' => 'create',
-            'details' => 'Created category: ' . $categories['name'],
+            'details' => 'Created category: '.$categories['name'],
         ]);
 
-
-        $request->user()->notify(new UserActionNotification('created', 'Created category: ' . $categories['name']));
+        $request->user()->notify(new UserActionNotification('created', 'Created category: '.$categories['name']));
 
         return redirect()->route('categories.index');
     }
@@ -54,6 +53,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = $this->categoryRepository->find($id);
+
         return view('categories.edit', compact('category'));
     }
 
@@ -70,10 +70,10 @@ class CategoryController extends Controller
         UserLog::create([
             'user_id' => Auth::id(),
             'action' => 'update',
-            'details' => 'Updated category: ' . $categories['name'],
+            'details' => 'Updated category: '.$categories['name'],
         ]);
 
-        $request->user()->notify(new UserActionNotification('updated', 'Updated category: ' . $categories['name']));
+        $request->user()->notify(new UserActionNotification('updated', 'Updated category: '.$categories['name']));
 
         return redirect()->route('categories.index');
     }
@@ -86,12 +86,11 @@ class CategoryController extends Controller
         UserLog::create([
             'user_id' => Auth::id(),
             'action' => 'delete',
-            'details' => 'Deleted category: ' . $id,
+            'details' => 'Deleted category: '.$id,
         ]);
 
-        $this->user()->notify(new UserActionNotification('deleted', 'Deleted category: ' . $id));
+        $this->user()->notify(new UserActionNotification('deleted', 'Deleted category: '.$id));
 
         return redirect()->route('categories.index');
     }
-    
 }

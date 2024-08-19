@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use Faker\Factory as Faker;
 use App\Models\Category;
+use Faker\Factory as Faker;
+use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
 {
@@ -16,15 +16,14 @@ class CategorySeeder extends Seeder
         $faker = Faker::create();
 
         $categories = [
-            'Snack', 'Soft Drink', 'Makanan', 'Body Care', 'Aminities', 'Bahan / Barang Dapur', 'Sembako'
+            'Snack', 'Soft Drink', 'Makanan', 'Body Care', 'Aminities', 'Bahan / Barang Dapur', 'Sembako',
         ];
 
         foreach ($categories as $category) {
             Category::create([
                 'name' => $category,
-                'description' => $faker->sentence()
+                'description' => $faker->sentence(),
             ]);
         }
     }
 }
-

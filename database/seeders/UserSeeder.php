@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\User;
 use Faker\Factory as Faker;
-use Spatie\Permission\Models\Role;
+use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
@@ -20,10 +19,9 @@ class UserSeeder extends Seeder
             'name' => 'Faker',
             'last_name' => 'Faker',
             'email' => 'superadmin@mpn.com',
-            'password' => bcrypt('password')
+            'password' => bcrypt('password'),
         ]);
 
         $user->assignRole('Admin');
     }
 }
-

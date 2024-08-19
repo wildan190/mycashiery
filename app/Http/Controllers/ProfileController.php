@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
 use App\Models\UserLog;
 use App\Notifications\UserActionNotification;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -28,19 +26,18 @@ class ProfileController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'last_name' => 'nullable|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . Auth::user()->id,
+            'email' => 'required|string|email|max:255|unique:users,email,'.Auth::user()->id,
             'current_password' => 'nullable|required_with:new_password',
             'new_password' => 'nullable|min:8|max:12|required_with:current_password',
-            'password_confirmation' => 'nullable|min:8|max:12|required_with:new_password|same:new_password'
+            'password_confirmation' => 'nullable|min:8|max:12|required_with:new_password|same:new_password',
         ]);
-
 
         $user = User::findOrFail(Auth::user()->id);
         $user->name = $request->input('name');
         $user->last_name = $request->input('last_name');
         $user->email = $request->input('email');
 
-        if (!is_null($request->input('current_password'))) {
+        if (! is_null($request->input('current_password'))) {
             if (Hash::check($request->input('current_password'), $user->password)) {
                 $user->password = $request->input('new_password');
             } else {
@@ -54,10 +51,10 @@ class ProfileController extends Controller
         UserLog::create([
             'user_id' => Auth::id(),
             'action' => 'update',
-            'details' => 'Updated profile: ' . $user->name,
+            'details' => 'Updated profile: '.$user->name,
         ]);
 
-        Auth::user()->notify(new UserActionNotification('updated', 'Updated Profile: ' . $user->name));
+        Auth::user()->notify(new UserActionNotification('updated', 'Updated Profile: '.$user->name));
 
         return redirect()->route('profile')->withSuccess('Profile updated successfully.');
     }
