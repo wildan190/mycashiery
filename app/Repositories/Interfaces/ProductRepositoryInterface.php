@@ -4,7 +4,6 @@ namespace App\Repositories\Interfaces;
 
 interface ProductRepositoryInterface
 {
-    
     public function getAll();
 
     public function find($id);
@@ -14,5 +13,4 @@ interface ProductRepositoryInterface
     public function update($id, array $data);
 
     public function delete($id);
-
 }

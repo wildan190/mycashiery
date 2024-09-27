@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\UserLog;
 use App\Notifications\UserActionNotification;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
@@ -14,6 +14,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::paginate(10);
+
         return view('users.index', compact('users'));
     }
 
@@ -21,6 +22,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $roles = Role::all();
+
         return view('users.edit', compact('user', 'roles'));
     }
 
@@ -28,7 +30,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:users,email,' . $id,
+            'email' => 'required|email|max:255|unique:users,email,'.$id,
             'password' => 'nullable|string|min:8|confirmed',
             'roles' => 'nullable|array',
             'roles.*' => 'exists:roles,id',
@@ -37,11 +39,11 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->name = $request->name;
         $user->email = $request->email;
-        
+
         if ($request->filled('password')) {
             $user->password = bcrypt($request->password);
         }
-        
+
         $user->save();
 
         if ($request->has('roles')) {
@@ -53,10 +55,10 @@ class UserController extends Controller
         UserLog::create([
             'user_id' => Auth::id(),
             'action' => 'create',
-            'details' => 'Created user: ' . $user->name,
+            'details' => 'Created user: '.$user->name,
         ]);
 
-        Auth::user()->notify(new UserActionNotification('updated', 'Updated user: ' . $user->name));
+        Auth::user()->notify(new UserActionNotification('updated', 'Updated user: '.$user->name));
 
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
@@ -70,11 +72,11 @@ class UserController extends Controller
         UserLog::create([
             'user_id' => Auth::id(),
             'action' => 'delete',
-            'details' => 'Deleted user: ' . $user->name,
+            'details' => 'Deleted user: '.$user->name,
         ]);
 
-        Auth::user()->notify(new UserActionNotification('deleted', 'Deleted user: ' . $user->name));
-        
+        Auth::user()->notify(new UserActionNotification('deleted', 'Deleted user: '.$user->name));
+
         return redirect()->route('users.index')->with('success', 'User deleted successfully.');
     }
 }

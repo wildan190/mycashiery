@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Repositories\Interfaces\ProductRepositoryInterface;
 use App\Models\Category;
 use App\Models\UserLog;
 use App\Notifications\UserActionNotification;
+use App\Repositories\Interfaces\ProductRepositoryInterface;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,12 +22,14 @@ class ProductController extends Controller
     public function index()
     {
         $products = $this->productRepository->getAll();
+
         return view('products.index', compact('products'));
     }
 
     public function create()
     {
         $categories = Category::all();
+
         return view('products.create', compact('categories'));
     }
 
@@ -48,10 +50,10 @@ class ProductController extends Controller
         UserLog::create([
             'user_id' => Auth::id(),
             'action' => 'create',
-            'details' => 'Created product: ' . $data['product_name'],
+            'details' => 'Created product: '.$data['product_name'],
         ]);
 
-        Auth::user()->notify(new UserActionNotification('created', 'Created product: ' . $data['product_name']));
+        Auth::user()->notify(new UserActionNotification('created', 'Created product: '.$data['product_name']));
 
         return redirect()->route('products.index')->with('success', 'Product created successfully.');
     }
@@ -60,6 +62,7 @@ class ProductController extends Controller
     {
         $product = $this->productRepository->find($id);
         $categories = Category::all();
+
         return view('products.edit', compact('product', 'categories'));
     }
 
@@ -80,10 +83,10 @@ class ProductController extends Controller
         UserLog::create([
             'user_id' => Auth::id(),
             'action' => 'update',
-            'details' => 'Updated product: ' . $data['product_name'],
+            'details' => 'Updated product: '.$data['product_name'],
         ]);
 
-        Auth::user()->notify(new UserActionNotification('updated', 'Updated product: ' . $data['product_name']));
+        Auth::user()->notify(new UserActionNotification('updated', 'Updated product: '.$data['product_name']));
 
         return redirect()->route('products.index')->with('success', 'Product updated successfully.');
     }
@@ -98,11 +101,11 @@ class ProductController extends Controller
         UserLog::create([
             'user_id' => Auth::id(),
             'action' => 'delete',
-            'details' => 'Deleted product: ' . $product->product_name,
+            'details' => 'Deleted product: '.$product->product_name,
         ]);
 
-        Auth::user()->notify(new UserActionNotification('deleted', 'Deleted product: ' . $product->product_name));
-        
+        Auth::user()->notify(new UserActionNotification('deleted', 'Deleted product: '.$product->product_name));
+
         return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
     }
 

@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Transaction;
 use App\Models\Product;
+use App\Models\Transaction;
+use App\Models\UserLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Midtrans\Config;
 use Midtrans\Snap;
-use Midtrans\Notification;
-use App\Models\UserLog;
-use Illuminate\Support\Facades\Auth;
 use PDF;
 
 class TransactionController extends Controller
@@ -44,7 +43,7 @@ class TransactionController extends Controller
         UserLog::create([
             'user_id' => Auth::id(),
             'action' => 'create',
-            'details' => 'Created transaction: ' . $transaction->transaction_number,
+            'details' => 'Created transaction: '.$transaction->transaction_number,
         ]);
 
         return view('transactions.snap', compact('snapToken'));
@@ -59,7 +58,7 @@ class TransactionController extends Controller
         UserLog::create([
             'user_id' => Auth::id(),
             'action' => 'print',
-            'details' => 'Printed transaction: ' . $transaction->transaction_number,
+            'details' => 'Printed transaction: '.$transaction->transaction_number,
         ]);
 
         return $pdf->download('transaction_receipt.pdf');
@@ -124,7 +123,7 @@ class TransactionController extends Controller
 
         $params = [
             'transaction_details' => [
-                'order_id' => $transaction->id . "-" . date('Ymdhis'),
+                'order_id' => $transaction->id.'-'.date('Ymdhis'),
                 'gross_amount' => $transaction->total_price,
             ],
             'item_details' => $items,

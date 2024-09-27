@@ -38,5 +38,4 @@ class CategoryRepository implements CategoryRepositoryInterface
     {
         return $this->category->find($id)->delete();
     }
-
 }

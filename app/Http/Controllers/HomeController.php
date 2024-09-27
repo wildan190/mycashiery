@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Product;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -41,7 +39,7 @@ class HomeController extends Controller
 
         $salesData = $monthlySales->map(function ($item) {
             return [
-                'month' => $item->month . '-' . $item->year,
+                'month' => $item->month.'-'.$item->year,
                 'total_sales' => $item->total_sales,
             ];
         });
@@ -65,4 +63,3 @@ class HomeController extends Controller
         return view('home', compact('salesData', 'productsSold', 'productsStock', 'categories'));
     }
 }
-

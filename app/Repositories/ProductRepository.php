@@ -45,5 +45,4 @@ class ProductRepository implements ProductRepositoryInterface
 
         return $product->delete();
     }
-    
 }
