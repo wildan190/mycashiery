@@ -1,4 +1,16 @@
 {
-    "workbench.colorTheme": "Ayu Dark",
+    "workbench.colorTheme": "GitHub Dark Dimmed",
     "workbench.iconTheme": "material-icon-theme",
+    "editor.fontFamily": "Fira Code",
+    "editor.fontSize": 16,
+    "editor.lineHeight": 24,
+    "editor.fontLigatures": true,
+    "editor.renderWhitespace": "all",
+    "editor.rulers": [80, 120],
+    "editor.wordWrap": "on",
+    "editor.minimap.enabled": false,
+    "window.zoomLevel": 0,
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.fontFamily": "Fira Code",
+    "terminal.integrated.lineHeight": 1.2
 }
