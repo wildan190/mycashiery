@@ -21212,3 +21212,27 @@ CONTEXT:  unnamed portal parameter $1 = '...' at C:\\laragon\\www\\mycashier\\ve
 #35 C:\\laragon\\www\\mycashier\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #36 {main}
 "} 
+[2024-10-06 17:11:24] local.ERROR: Command "db:seedn" is not defined.
+
+Did you mean one of these?
+    db
+    db:monitor
+    db:seed
+    db:show
+    db:table
+    db:wipe {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"db:seedn\" is not defined.
+
+Did you mean one of these?
+    db
+    db:monitor
+    db:seed
+    db:show
+    db:table
+    db:wipe at /Users/wildanbelfiore/mycashiery/vendor/symfony/console/Application.php:702)
+[stacktrace]
+#0 /Users/wildanbelfiore/mycashiery/vendor/symfony/console/Application.php(258): Symfony\\Component\\Console\\Application->find('db:seedn')
+#1 /Users/wildanbelfiore/mycashiery/vendor/symfony/console/Application.php(167): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#2 /Users/wildanbelfiore/mycashiery/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(197): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 /Users/wildanbelfiore/mycashiery/artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 {main}
+"} 
