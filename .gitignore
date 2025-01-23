@@ -12,3 +12,7 @@ yarn-error.log
 
 /.phpunit.cache
 storage/logs/laravel.log
+
+**/caddy
+frankenphp
+frankenphp-worker.php

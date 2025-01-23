@@ -15,6 +15,7 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^11.0",
         "laravel/legacy-factories": "^1.4",
+        "laravel/octane": "^2.6",
         "laravel/tinker": "^2.9",
         "laravel/ui": "^4.0",
         "midtrans/midtrans-php": "^2.5",
